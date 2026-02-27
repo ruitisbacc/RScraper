@@ -1,0 +1,21 @@
+# Build output
+/build/
+/cmake-build-*/
+
+# IDE / editor
+/.vs/
+*.user
+*.suo
+
+# CMake local files
+/CMakeUserPresets.json
+/compile_commands.json
+
+# Local test helpers / scratch files
+/_tmp_*
+
+# Runtime output (if created outside build/)
+*.log
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

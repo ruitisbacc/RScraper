@@ -1,0 +1,16 @@
+{
+    "name": "webmirror",
+    "version": "0.1.0",
+    "description": "Static website mirror CLI application",
+    "builtin-baseline": "c82f74667287d3dc386bce81e44964370c91a289",
+    "dependencies": [
+        "curl",
+        "gumbo",
+        "sqlite3",
+        "cli11",
+        "spdlog",
+        "fmt",
+        "catch2",
+        "nlohmann-json"
+    ]
+}
