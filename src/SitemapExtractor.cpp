@@ -1,4 +1,5 @@
 #include "rscraper/SitemapExtractor.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -38,13 +39,6 @@ std::string decodeXmlEntities(std::string value) {
         }
     }
     return value;
-}
-
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
 }
 
 bool looksLikePathHint(std::string_view value) {

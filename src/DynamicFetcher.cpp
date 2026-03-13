@@ -1,6 +1,7 @@
 #include "rscraper/DynamicFetcher.hpp"
 #include "rscraper/JsonExtractor.hpp"
 #include "rscraper/Url.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <curl/curl.h>
 #include <curl/websockets.h>
@@ -768,13 +769,6 @@ bool evalValue(const json& response, json& out) {
     }
     out = r["result"]["value"];
     return true;
-}
-
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
 }
 
 bool containsIcase(std::string_view text, std::string_view needle) {

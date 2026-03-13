@@ -1,4 +1,5 @@
 #include "rscraper/PathMapper.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <array>
@@ -9,13 +10,6 @@
 namespace rscraper {
 
 namespace {
-
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
-}
 
 bool isServerSidePageExtension(std::string_view ext) {
     static constexpr std::array<std::string_view, 12> kServerSideExt = {

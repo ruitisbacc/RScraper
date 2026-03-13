@@ -1,6 +1,6 @@
 #include "rscraper/JsExtractor.hpp"
-
 #include "rscraper/Url.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -21,7 +21,7 @@ bool startsWithAny(std::string_view value, std::initializer_list<std::string_vie
 }
 
 bool isLikelyUrl(std::string_view candidate) {
-    if (candidate.empty() || candidate.size() > 2048) {
+    if (candidate.empty() || candidate.size() > kMaxUrlCandidateLength) {
         return false;
     }
 
