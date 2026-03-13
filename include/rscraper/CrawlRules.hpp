@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Config.hpp"
+#include "Utility.hpp"
 
 namespace rscraper {
 
@@ -22,7 +23,6 @@ public:
     [[nodiscard]] bool isAliasHost(std::string_view host) const;
 
 private:
-    static std::string toLowerAscii(std::string_view input);
     static std::string normalizeAliasHost(std::string_view alias);
     static std::vector<std::regex> compileRegexList(const std::vector<std::string>& patterns,
                                                     const char* optionName);

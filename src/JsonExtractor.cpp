@@ -1,6 +1,6 @@
 #include "rscraper/JsonExtractor.hpp"
-
 #include "rscraper/Url.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -18,13 +18,6 @@ namespace {
 
 using json = nlohmann::json;
 
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
-}
-
 bool startsWithAny(std::string_view value, std::initializer_list<std::string_view> prefixes) {
     for (auto prefix : prefixes) {
         if (value.starts_with(prefix)) {
@@ -35,7 +28,7 @@ bool startsWithAny(std::string_view value, std::initializer_list<std::string_vie
 }
 
 bool isLikelyUrl(std::string_view candidate) {
-    if (candidate.empty() || candidate.size() > 2048) {
+    if (candidate.empty() || candidate.size() > kMaxUrlCandidateLength) {
         return false;
     }
 

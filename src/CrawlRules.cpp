@@ -1,6 +1,6 @@
 #include "rscraper/CrawlRules.hpp"
-
 #include "rscraper/Url.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -46,13 +46,6 @@ bool CrawlRules::isContentTypeAllowed(std::string_view contentType) const {
 
 bool CrawlRules::isAliasHost(std::string_view host) const {
     return aliasHosts_.find(toLowerAscii(host)) != aliasHosts_.end();
-}
-
-std::string CrawlRules::toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
 }
 
 std::string CrawlRules::normalizeAliasHost(std::string_view alias) {

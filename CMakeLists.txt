@@ -51,6 +51,7 @@ set(RSCRAPER_HEADERS
     include/rscraper/DynamicFetcher.hpp
     include/rscraper/DynamicDetector.hpp
     include/rscraper/Config.hpp
+    include/rscraper/Utility.hpp
 )
 
 # Library target (for testing)

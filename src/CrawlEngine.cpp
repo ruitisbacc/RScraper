@@ -4,6 +4,7 @@
 #include "rscraper/HtmlRewriter.hpp"
 #include "rscraper/CssRewriter.hpp"
 #include "rscraper/SitemapExtractor.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <spdlog/spdlog.h>
 #include <fstream>
@@ -21,13 +22,6 @@ namespace rscraper {
 using json = nlohmann::json;
 
 namespace {
-
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return out;
-}
 
 std::string canonicalUrlKey(std::string_view rawUrl) {
     auto parsed = Url::parse(rawUrl);
@@ -59,7 +53,7 @@ bool looksLikeHtmlBody(const std::vector<uint8_t>& body) {
     if (body.empty()) {
         return false;
     }
-    const std::size_t probeLen = std::min<std::size_t>(body.size(), 2048);
+    const std::size_t probeLen = std::min<std::size_t>(body.size(), kHtmlProbeLength);
     std::string prefix(reinterpret_cast<const char*>(body.data()), probeLen);
     auto lower = toLowerAscii(prefix);
     return lower.find("<!doctype html") != std::string::npos ||

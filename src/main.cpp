@@ -5,6 +5,7 @@
 
 #include "rscraper/Config.hpp"
 #include "rscraper/CrawlEngine.hpp"
+#include "rscraper/Utility.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -20,6 +21,8 @@
 #include <vector>
 
 namespace {
+
+using rscraper::toLowerAscii;
 
 std::unique_ptr<rscraper::CrawlEngine> g_engine;
 
@@ -90,14 +93,6 @@ void signalHandler(int signal) {
         spdlog::warn("Received signal {}, stopping...", signal);
         g_engine->stop();
     }
-}
-
-std::string toLowerAscii(std::string_view input) {
-    std::string out(input);
-    std::transform(out.begin(), out.end(), out.begin(), [](unsigned char c) {
-        return static_cast<char>(std::tolower(c));
-    });
-    return out;
 }
 
 std::string trimCopy(std::string_view input) {
